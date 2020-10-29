@@ -11,7 +11,6 @@ public class RubyController : MonoBehaviour
 
     public GameObject projectilePrefab;
 
-    public float timeInvincible = 2.0f;
 
     public int health { get { return currentHealth; }}
     int currentHealth;
@@ -30,8 +29,8 @@ public class RubyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         currentHealth = maxHealth;
     }
@@ -88,7 +87,8 @@ public class RubyController : MonoBehaviour
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log(currentHealth + "/" + maxHealth);
+
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
     void Launch()
